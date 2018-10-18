@@ -387,5 +387,20 @@ public class DAOImpl implements DAO{
 		
 		return serviceWithDate;
 	}
+
+	@Override
+	public int updatePhone(Customer cust, String newPhone) {
+		String sql = "UPDATE SERVICE_CUSTOMER_Ri Set phone = ? where cid = ?";
+		int updated = 0;
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, newPhone);
+			pstm.setInt(2, cust.getCid());
+			updated = pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return updated;
+	}
 	
 }

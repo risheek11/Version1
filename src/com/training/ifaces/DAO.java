@@ -22,4 +22,5 @@ public interface DAO {
 	int addNewService(ServiceDetail serviceDetail);
 	CarServices getCarServiceRate(String serviceType);
 	HashMap<String, List<ServiceLog>> getServiceLogByRegno(String regno);
+	int updatePhone (Customer cust,String newPhone);
 }

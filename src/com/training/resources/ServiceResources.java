@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -260,5 +262,21 @@ public class ServiceResources {
 		
 	}
 	
+	/**
+	 * update phone number of a customer
+	 */
+	@PUT
+	@Path("updatePhone")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateDonor(Customer customer,@QueryParam("newPhone") String newPhone){
+		int updated = dao.updatePhone(customer, newPhone);
+		if(updated ==1){
+			return Response.status(200).build();
+		}
+		else{
+			return Response.status(400).build();
+		}
+		
+	}
 	
 }

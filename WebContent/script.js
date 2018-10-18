@@ -32,9 +32,34 @@ function getCustomersFullDetails(){
     });
 }
 
+var custObjtoSend;
 function makeCustomerObj(){
 	var cid = $('#customer option:selected').val().split(" ")[0];
+	var custName =$('#customer option:selected').val().split(" ")[1];
+	var phone = $('#customer option:selected').val().split(" ")[2];
 	
+	var custObj = {};
+	custObj['cid'] = cid;
+	custObj['custName'] = custName;
+	custObj['phone'] = phone;
+	custObjtoSend=custObj;
+	
+}
+
+function changePhone(){
+	var newPhone = $('#phone').val();
+	alert(newPhone);
+	//send custObjtoSend
+	$.ajax({
+	    type: 'PUT',
+	    url: 'http://localhost:8080/MarutiServiceCenter/rest/service/updatePhone?newPhone='+newPhone,
+	    contentType: 'application/json',
+	    data: JSON.stringify(custObjtoSend), // access in body
+	}).done(function () {
+	   alert("Succesfuly Updated");
+	}).fail(function (msg) {
+	   alert("Not able to update");
+	});
 }
 
 function getRegNO() {
